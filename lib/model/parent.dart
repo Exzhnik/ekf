@@ -7,7 +7,7 @@ class TodoItem {
       this.dateBirth,
       this.position,
       this.complete});
-  static String table = 'table_EKF';
+  static String table = 'ekf';
 
   int id;
   String firstName;

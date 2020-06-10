@@ -1,8 +1,8 @@
+import 'package:ekf/model/parent.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'model/todo_item.dart';
 import 'services/db.dart';
 
 Future main() async {
@@ -33,10 +33,10 @@ class _MyHomePageState extends State<MyHomePage> {
   String nameFirst, nameLast, nameSecond, dateOfBirth, userPosition;
   var dateCtl = TextEditingController();
 
-  List<TodoItem> _tasks = [];
+  List<Parent> _tasks = [];
   TextStyle _style = TextStyle(color: Colors.white, fontSize: 24);
   List<Widget> get _items => _tasks.map(format).toList();
-  Widget format(TodoItem item) {
+  Widget format(Parent item) {
     return Dismissible(
       key: Key(item.id.toString()),
       onDismissed: (direction) => _delete(item),
@@ -76,29 +76,29 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Future _toggle(TodoItem item) async {
+  Future _toggle(Parent item) async {
     item.complete = !item.complete;
-    dynamic result = await DB.update(TodoItem.table, item);
+    dynamic result = await DB.update(Parent.table, item);
     print(result);
     dateCtl.clear();
     await refresh();
   }
 
-  Future _delete(TodoItem item) async {
-    await DB.delete(TodoItem.table, item);
+  Future _delete(Parent item) async {
+    await DB.delete(Parent.table, item);
     await refresh();
   }
 
   Future _save() async {
     Navigator.of(context).pop();
-    var item = TodoItem(
+    var item = Parent(
         firstName: nameFirst,
         lastName: nameLast,
         secondName: nameSecond,
         dateBirth: dateOfBirth,
         position: userPosition,
         complete: false);
-    await DB.insert(TodoItem.table, item);
+    await DB.insert(Parent.table, item);
     setState(() {
       nameFirst = '';
       nameLast = '';
@@ -204,8 +204,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future refresh() async {
-    var _results = await DB.query(TodoItem.table);
-    _tasks = _results.map(TodoItem.fromMap).toList();
+    var _results = await DB.query(Parent.table);
+    _tasks = _results.map(Parent.fromMap).toList();
     setState(() {});
   }
 
