@@ -1,21 +1,16 @@
-class Parent {
-  Parent({
-    this.id,
-    this.firstName,
-    this.lastName,
-    this.secondName,
-    this.dateBirth,
-    this.position,
-    this.complete,
-  });
+import 'package:ekf/model/parent.dart';
+
+class Children {
+  Children();
 
   int id;
   String firstName;
   String lastName;
   String secondName;
   String dateBirth;
-  String position;
   bool complete;
+  int parentId;
+  Parent parent;
 
   static final columns = [
     'id',
@@ -25,6 +20,7 @@ class Parent {
     'dateBirth',
     'position',
     'complete',
+    'parent_id'
   ];
 
   Map<String, dynamic> toMap() {
@@ -33,8 +29,8 @@ class Parent {
       'lastName': lastName,
       'secondName': secondName,
       'dateBirth': dateBirth,
-      'position': position,
       'complete': complete,
+      'parent_id': parentId
     };
 
     if (id != null) {
@@ -43,14 +39,14 @@ class Parent {
     return map;
   }
 
-  static Parent fromMap(Map<String, dynamic> map) {
-    return Parent()
+  static Children fromMap(Map<String, dynamic> map) {
+    return Children()
       ..id = map['id'] as int
       ..firstName = map['firstName'] as String
       ..lastName = map['lastName'] as String
       ..secondName = map['secondName'] as String
       ..dateBirth = map['dateBirth'] as String
-      ..position = map['parent_id'] as String
-      ..complete = map['complete'] == 1;
+      ..complete = map['complete'] == 1
+      ..parentId = map['parent_id'] as int;
   }
 }

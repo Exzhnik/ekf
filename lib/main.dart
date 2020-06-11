@@ -61,6 +61,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         Text(
                           'Дата рождения: ${item.dateBirth}',
                           style: TextStyle(color: Colors.white),
+                        ),
+                        Text(
+                          'ID: ${item.id}',
+                          style: TextStyle(color: Colors.white),
                         )
                       ],
                     ),
